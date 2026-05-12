@@ -1,24 +1,55 @@
 require("dotenv").config();
-const { Client, GatewayIntentBits } = require("discord.js");
+const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
+const DiscordStrategy = require("passport-discord").Strategy;
+const path = require("path");
 
-const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
-    ]
-});
+const app = express();
 
-client.once("ready", () => {
-    console.log(`Bot online as ${client.user.tag}`);
-});
+app.use(express.static(path.join(__dirname, "public")));
 
-client.on("messageCreate", (msg) => {
-    if (msg.author.bot) return;
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
 
-    if (msg.content === "!ping") {
-        msg.reply("Pong!");
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((obj, done) => done(null, obj));
+
+passport.use(new DiscordStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: process.env.REDIRECT_URI,
+    scope: ["identify"]
+}, (accessToken, refreshToken, profile, done) => {
+    return done(null, profile);
+}));
+
+app.get("/login", passport.authenticate("discord"));
+
+app.get("/callback",
+    passport.authenticate("discord", { failureRedirect: "/" }),
+    (req, res) => {
+        res.redirect("/dashboard");
     }
+);
+
+function checkAuth(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect("/login");
+}
+
+app.get("/dashboard", checkAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "Dashboard.html"));
 });
 
-client.login(process.env.TOKEN);
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "Index.html"));
+});
+
+app.listen(3000, () => console.log("Backend running"));
