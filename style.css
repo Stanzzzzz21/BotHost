@@ -1,0 +1,139 @@
+
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #2DD4BF;
+}
+
+a:hover, a:focus, a:active {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    text-decoration: none;
+    color: #2DD4BF
+ }      
+
+
+
+  body {
+    margin: 0;
+    height: 100vh;
+
+    background: linear-gradient(
+      270deg,
+    
+      
+      #0F172A
+      
+
+    );
+
+    background-size: 400% 400%;
+    animation: moveBg 10s ease infinite;
+  }
+
+  @keyframes moveBg {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+
+  style {
+    background-color: ;
+  }
+h1 {
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    font-size: 69px;
+    line-height: 1.1;
+
+    margin: 0;
+    padding: 40px;
+    color: #FFFFFF
+}
+h3 {
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    font-size: 30px;
+   
+
+    margin: 0;
+    padding: 40px;
+    color: #818CF8
+}
+span {
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    color: #2DD4BF;
+}
+
+p{
+    text-align: center;
+    font-family: "Inter", sans-serif;
+ color: #CBD5E1;
+}
+.infobox {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+    margin: 20px;
+    width: 400px;
+    height: 230px;
+    color: #94A3B8;
+    padding: 20px; border-radius: 10px;
+    
+    
+    border: 2px solid #2DD4BF;
+}
+.footer {
+text-align: center;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+large {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    color: rgb(59, 59, 59);
+}
+.nav {
+     position: absolute;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #1E293B
+    border-bottom: 2px solid #ffffff;
+    border-radius: 0;
+    text-align: center; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    text-anchor: 10px;
+    font-weight: bold;
+    color: rgb(201, 201, 201);
+
+
+}
+.logo {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+button {
+  margin-left: 40px;
+  border-radius: 50px;
+  border-color:#2DD4BF;
+  border-width: 2px;
+  background-color: #5865F2;
+  color: #FFFFFF;
+  height: 60px;
+  width: 250px;
+  font-size: 20px;
+}
